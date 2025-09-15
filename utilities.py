@@ -1,7 +1,6 @@
 import json 
 import math # This is for sqrt and other maths 
-import numpy as np # This is for creating a matrix for the heatmap 
-import matplotlib.pyplot as plt # This is for creating figures. 
+from pathlib import Path
 
 def new_entry():
     print("## NAME ##")
@@ -12,21 +11,37 @@ def new_entry():
     print("## POWER & SPEED ##")
     pow_lb = float(input("Lower bound of power range (W): "))
     pow_ub = float(input("Upper bound of power range (W): "))
-    pow_interval = float(input("What is the size of the interval of power?: "))
-    pow_num_intervals = int((pow_ub-pow_lb)//pow_interval) + 1
+    pow_interval = float(input("What is the step size of power?: "))
+    pow_num_intervals = 0 
+    while (pow_num_intervals == 0):
+        pow_range = pow_ub - pow_lb 
+        while (pow_range - pow_interval >= 0): 
+            pow_num_intervals += 1 
+            pow_range -= pow_interval
+        if pow_num_intervals == 0: 
+            print("Step size is too large for range, please enter a smaller step")
+            pow_interval = float(input("What is the step size of power?: "))
+    
     speed_lb = float(input("Lower bound of speed range in mm⁻ˢ: "))*(10**-3)
     speed_ub = float(input("Upper bound of speed range in mm⁻ˢ: ")) *(10**-3)
-    speed_interval = float(input("What is the size of the interval of speed?: "))*(10**-3)
-    speed_num_intervals = int((speed_ub-speed_lb)//speed_interval) + 1
+    speed_interval = float(input("What is the step size of speed?: "))*(10**-3)
+    speed_num_intervals = 0 
+    while (speed_num_intervals == 0):
+        speed_range = speed_ub - speed_lb 
+        while (speed_range - speed_interval >= 0): 
+            speed_num_intervals += 1 
+            speed_range -= speed_interval
+        if speed_num_intervals == 0: 
+            print("Step size is too large for range, please enter a smaller step")
+            speed_interval = float(input("What is the step size of speed?: "))
+
 
     this_entry["pow_lb"] = pow_lb 
     this_entry["pow_ub"] = pow_ub
     this_entry["pow_interval"] = pow_interval
-    this_entry["pow_num_intervals"]=pow_num_intervals 
     this_entry["speed_lb"] = speed_lb 
     this_entry["speed_ub"] = speed_ub 
     this_entry["speed_interval"] = speed_interval 
-    this_entry["speed_num_intervals"] = speed_num_intervals
 
     print("## WIDTH EQUATION VARIABLES ##")
     const = float(input("Proportionality constant C (has no units): "))
@@ -73,14 +88,15 @@ def new_entry():
                 actual_depth = float(input("Melt pool depth (for " + str(power_level) + "W, " + str(speed_level*10**3) + "mm⁻ˢ in μm): "))* (10**-6) 
                 experiment_data[str(power_level) + "," + str(speed_level)] = (actual_width,actual_depth)
         this_entry["experiment_data"] = experiment_data
-
-    with open ("data.json",'r') as file:
-        if file.read(2) !="[]" and file.read(2)!="{}" and file.read(2)!="":
-            json_data = json.load(file)
-        else:
-            f = open("data.json","w",encoding="utf-8")
-    json_data[metal] = this_entry
-    json.dump(json_data,f)
+    path = Path('data.json')
+    if path.stat().st_size > 2: 
+        with open('data.json', 'r') as f:
+            json_data = json.load(f)
+    else: 
+        json_data = {}
+    with open('data.json', 'w') as f: 
+        json_data[metal] = this_entry 
+        json.dump(json_data, f)
 
 
 def predict_width(power, speed, json_data, metal): # Please note that these functions I made will only accept standard units in order to get accurate answers
