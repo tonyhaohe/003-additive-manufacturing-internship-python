@@ -62,9 +62,6 @@ def draw(metal):
             # Predicted melt pool width and depth plotting for this specific subplot
             pred_width = round((predict_width(power_level,speed_level,json_data, metal)*(10**6)),0) #10^6 scales the very small width so it can be seen on the subplot
             pred_depth = round((predict_depth(power_level,speed_level,json_data, metal)*(10**6)),0)
-            # To help you with debugging if needed
-            # print(str(speed_level)*10 + "$mms^{-1}$, " + str(power_level) + "W depth is " + str(depth))
-            # print("The current power and speed coordinates are: " + str(pow_num_intervals-1-pow_count) + " for power and " + str(speed_count) + " for speed")  
             annotation_width = str(pred_width) + "μm"
             annotation_depth = str(pred_depth) + " \nμm"
             
