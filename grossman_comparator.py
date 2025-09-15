@@ -127,8 +127,9 @@ if (__name__=='__main__'):
             new_entry()
         else: 
             print("Use arrow keys ← Left and → Right to navigate entries")
-            f = open("data.json","r",encoding="utf-8")
-            json_data = json.load(f)
+            json_data = {}
+            with open("data.json","r",encoding="utf-8") as f:
+                json_data = json.load(f)
             keys = list(json_data)
             draw(keys[0])
             plt.show()
