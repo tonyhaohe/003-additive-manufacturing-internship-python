@@ -1,5 +1,3 @@
-# To do: 
-# 1. Find out the correct final significant figures by looking into the precision of the values. Perhaps don't use float to avoid precision loss. 
 import numpy as np # Help create graphs
 import matplotlib.pyplot as plt # This is for creating figures. 
 import matplotlib.patches as pat # This is for creating shapes on the figures
