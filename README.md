@@ -17,8 +17,8 @@
 ## About 
 
 This project implements the Grossman et al. model and, when given experimental data, compares its predictions to the data. Researchers can assess their own models' performance against Grossman’s to improve laser powder bed fusion processes.
-- `grossman_comparator.py` - Compares the Grossman model's predictions with actual experimental values.
-- `grossman_heatmap.py` - Visualizes prediction errors as heatmaps for intuitive analysis.
+- `compare_pools.py` - Compares the Grossman model's predictions with actual experimental values.
+- `error_heatmap.py` - Visualizes prediction errors as heatmaps for intuitive analysis.
 
 ### Independent Variables:
 
