@@ -45,7 +45,7 @@ def draw(metal):
     percentage_error_matrix = np.ones((pow_num_intervals, speed_num_intervals)) # Creating the numpy array (which is a matrix) to put into the heatmap 
     highest_percentage_error = np.zeros((1)) # To keep track of the highest percent and then eventually define the scale of the heatmap
     
-    fig.canvas.manager.set_window_title("Figure 1 - " + metal)
+    fig.canvas.manager.set_window_title("Figure 2 - Heatmap of Prediction Error for " + metal)
 
 
     power = deque()
