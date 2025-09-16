@@ -40,7 +40,6 @@ def draw(metal):
     metal_fig.canvas.manager.set_window_title("Figure 1 - " + metal)
 
     metal_fig.suptitle(metal + ": The effect of scanning speed (mm$s^{-1}$) & power (W) on melt pool width & depth(μm) with laser diameter " + str(round(this_entry["sigma"]*(10**6),0)) + "μm")
-    legend_count = 0 
         
     # Make a collection of subplots (each with their own information) and are sorted by a y-axis for power and an x-axis for speed. Two loops so that we go through all the desired values of power and speed and make graphs out of each combination 
     plot_idx = 1 # Add subplot index starts from 1
@@ -92,14 +91,10 @@ def draw(metal):
                 actual_melt_pool = pat.Arc((0,0),width = actual_width, height = 2*actual_depth, theta1=0, theta2=180, fc=(1,0,0,0.3), edgecolor = "red")
 
                 axs[grid_coordinate].add_patch(actual_melt_pool)
-
-            # The legend only needs to be added once
-            if (legend_count==0):
-                predicted_melt_pool.set_label("Predicted")
-                if "experiment_data" in this_entry:
-                    actual_melt_pool.set_label("Actual")
-                legend_count+=1
-                metal_fig.legend()
+    predicted_melt_pool.set_label("Predicted")
+    if "experiment_data" in this_entry:
+        actual_melt_pool.set_label("Actual")
+    metal_fig.legend()
     metal_fig.canvas.draw_idle()
                
 i = 0
