@@ -21,6 +21,7 @@ def new_entry():
         if pow_num_intervals == 0: 
             print("Step size is too large for range, please enter a smaller step")
             pow_interval = float(input("What is the step size of power?: "))
+    pow_num_intervals += 1
     
     speed_lb = float(input("Lower bound of speed range in mm⁻ˢ: "))*(10**-3)
     speed_ub = float(input("Upper bound of speed range in mm⁻ˢ: ")) *(10**-3)
@@ -34,7 +35,7 @@ def new_entry():
         if speed_num_intervals == 0: 
             print("Step size is too large for range, please enter a smaller step")
             speed_interval = float(input("What is the step size of speed?: "))
-
+    speed_num_intervals += 1
 
     this_entry["pow_lb"] = pow_lb 
     this_entry["pow_ub"] = pow_ub
