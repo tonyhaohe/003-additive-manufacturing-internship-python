@@ -13,7 +13,6 @@
 - [References](#references)
 
 ## About 
-
 This project implements the Grossman et al. model and, when given experimental data, compares its predictions to the data. Researchers can assess their own models' performance against Grossman’s to improve laser powder bed fusion processes.
 - `grossman_comparator.py` - Compares the Grossman model's predictions with actual experimental values.
 - `grossman_heatmap.py` - Visualizes prediction errors as heatmaps for intuitive analysis.
@@ -22,9 +21,11 @@ This project implements the Grossman et al. model and, when given experimental d
 - Power (W)
 - Speed (mm·s⁻¹)
 - Laser beam diameter (µm)
+
 ### The Models Used: 
 - Melt pool width: Grossman et al. [1], Eq. 7 (Not 11 since their calculated constant is used in these programs)
 - Melt pool depth: Grossman et al. [2], Eq. 6 (also uses a constant they calculated)
+
 ## Installation 
 ```
 # 1. Open a terminal (Command Prompt or PowerShell for Windows, Terminal for macOS or Linux)
@@ -60,7 +61,6 @@ The `-` is vital, since it tells the shell to take user input after the text fil
 ### Visualize error heatmaps
 Run `python error_heatmap.py`
 Please note that it will not be able to calculate anything and thus display nothing unless you input experimental data. 
-
 
 ### Data Storage
 Data is stored in `data.json` using standard SI units (m, J, etc.).
