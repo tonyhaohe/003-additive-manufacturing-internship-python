@@ -1,0 +1,20 @@
+Name of metal power - AlSi10Mg here
+Lower bound of power range = 100W from our decision
+Upper bound of power range = 400W from our decision
+Size of intervals of power = 100W from our decision
+Lower bound of speed range = 750 from our decision
+Upper bound of speed range = 2250 from our decision
+Size of intervals of speed = 750 from our decision
+Proportionality constant = 0.49 from [1] p.7 table 3 (determined by Grossman et al. by regression analysis).
+Material density = 2670 from [1] p.4 table 2 | 2690-0.19*(current_temp-293.15) from [3] - I have chosen 2670
+Specific heat capacity = 910 from [1] p.4 table 2 | 536.1+0.035*current_temp from [3] - I have chosen 910. Please note this value (belonging to Grossman) did account for changes in temperature to some extent by using an effective specific heat capacity value, not a specific heat capacity value.
+Initial temperature = 298K from assuming that the metal powder is initially is at room temperature
+Melting temperature = 870K from [1] p.4 table 2. | 867K from [3] - I have chosen 870K
+Conductivity = 140 from [2] p.3 table 1 | 113+1.06*(10^-5)*current_temp from [3] - I chosen 140
+Solidus temperature (this is the temperature below which an alloy is completely solid, no liquid at all) = 830.15K from [2] p.3 table 1 - I have chosen 830.15K
+Plate temperature = 298K from assuming it's standard room temperature
+Heat of fusion (energy for converting 1kg solid to liquid) = 476500 from [2] p.3 table 1 | 5.03*10^5 from [3] - I have chosen 476500
+Absorptivity of the metal = 0.32 from [2] p.3 table 1 | No Absorptivity yet from us, is minimum sbsorptivity the same? - I have chosen 0.32
+Thermal diffusivity = conductivity/(rho*cp) (which is a standard equation) | 4.5*10^-5 from [3] - I have decided to use the standard equation because while it is more proper to use an experimental value which is the theoretical naturally adjusted by unaccounted factors, there was no indication that a thermal diffusivity experimental value was used. I could be wrong and we could check.
+Laser beam diameter = varies. It's typically 100 micrometres, 75 micrometres, 50 micrometres etc. on these machines
+Melt pool depth coefficient = 5.9 from [2] p.4 table 4. (determined by Grossman et al. by experiments)
