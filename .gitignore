@@ -1,3 +1,5 @@
 # Ignore all files in archive
+private_notes.md
+venv/
 archive/
 __pycache__/
