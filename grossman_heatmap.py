@@ -1,12 +1,14 @@
 import matplotlib.pyplot as plt # This is for creating figures 
 import numpy as np # This is for creating a matrix for the heatmap 
 import matplotlib.colors as mcolors # This is for normalising data with a set centre 
+from matplotlib.patches import Patch
 import json 
 from collections import deque # This is for adding power labels. 
 
 from utilities import new_entry, predict_depth, predict_width, calculate_ellipsoid_volume
 
-fig = plt.figure(figsize = (8,8), layout = "constrained")
+fig = plt.figure(figsize = (8,8))
+fig.subplots_adjust(right=0.8)
 
 def draw(metal): 
     this_entry = json_data[metal]
@@ -45,8 +47,6 @@ def draw(metal):
     
     fig.canvas.manager.set_window_title("Figure 1 - " + metal)
 
-    fig.suptitle(metal + ": The effect of scanning speed (mm$s^{-1}$) & power (W) on melt pool width & depth(μm) with laser diameter " + str(round(this_entry["sigma"]*(10**6),0)) + "μm")
-
 
     power = deque()
     speed = []
@@ -69,19 +69,26 @@ def draw(metal):
             actual_depth = this_entry["experiment_data"][str(power_level)+ ","+str(speed_level)][1]
             actual_volume = calculate_ellipsoid_volume(actual_width, actual_depth)
 
-            percentage_error = predicted_volume/actual_volume * 100 
+            percentage_error = (predicted_volume - actual_volume) /actual_volume * 100 
+            print("The percentage error for " + str(power_level) + "W " + str(speed_level) + "mms^-1 is " + str(percentage_error))
+            print("This is from calculating the ratio of the predicted volume of " + str(predicted_volume) + " and actual volume of " + str(actual_volume))
             ## PROCESSING THE PERCENTAGE ERROR BY CHANGING THE SIGN AND BY RE-ASSIGNING WHAT IS THE HIGHEST PERCENTAGE ERROR IF NECESSARY ##
             if (pow_count<1):
                 speed.append(str(speed_level * (10**3)) + " mms⁻¹") # Creating labels for the horizontal axis. This only needs to be done once, which can be done in the pow_count = 0 iteration
-            if (predicted_volume<actual_volume):
-                percentage_error =-2* percentage_error # If the predicted volume was lower than the actual, this is reflected in the percentage error with the minus sign in front of the percentage
-            if (percentage_error>highest_percentage_error[0]):
-                highest_percentage_error[0] = percentage_error # Likewise, if the predicted volume was actually larger we just keep it in the positives
+            if (abs(percentage_error)>highest_percentage_error[0]):
+                print("ok, so we change highest percentage error to" + str(abs(percentage_error)))
+                highest_percentage_error[0] = abs(percentage_error) # Likewise, if the predicted volume was actually larger we just keep it in the positives
             percentage_error_matrix[row][column] = percentage_error - 1e-9 # You need the 1e-9 because it pushes you into the boundary of the cell so the console doesn't start throwing error messages (notice that if you remove this, the bottom left corner of the window for some cells might not even display the value)
     norm = mcolors.TwoSlopeNorm(vmin=-highest_percentage_error, vcenter = 0, vmax = highest_percentage_error)
     ax = fig.add_subplot()
     heatmap(percentage_error_matrix, power , speed, ax=ax,
                         cmap="bwr", cbarlabel="Percentage error", norm = norm)
+    legend_elements = [
+        Patch(facecolor='red', label='Over-predicted'),
+        Patch(facecolor='blue', label='Under-predicted')
+    ]
+    ax.legend(handles=legend_elements, title='Prediction Error', loc='upper left', bbox_to_anchor=(1.25,1), borderaxespad=0)
+    ax.set_title(metal + ": The effect of scanning speed (mm$s^{-1}$) & power (W) on melt pool width & depth(μm) with laser diameter " + str(round(this_entry["sigma"]*(10**6),0)) + "μm", wrap=True)
     fig.canvas.draw_idle()
     
 
