@@ -64,12 +64,16 @@ To populate with dummy data, you can do:
 ```bash
 cat example_entry_dummymetal.txt - | python3 compare_pools.py
 ```
-The `-` is vital, since it tells the shell to take user input after the text file is inputted. You will be able to use this inputted data with the heatmap. 
+The `-` is vital, since it tells the shell to take user input after the text file is inputted. You will be able to use this inputted data with the heatmap.
+ 
+![compare_pools.py showing dummy data](assets/compare_pools.png)
 
 ### Visualize error heatmaps
 
 Run `python error_heatmap.py`
 Please note that it will not be able to calculate anything and thus display nothing unless you input experimental data. 
+
+![error_heatmap.py showing dummy data](assets/error_heatmap.png)
 
 ### Data Storage
 
