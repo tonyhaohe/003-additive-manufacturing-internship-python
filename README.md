@@ -11,7 +11,7 @@
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [Data for AlSi10Mg](#data-for-alsi10mg)
-- [Support and Contributing](#support)
+- [Support and Contributing](#support-and-contributing)
 - [References](#references)
 
 ## About 
@@ -71,7 +71,7 @@ The `-` is vital, since it tells the shell to take user input after the text fil
 ### Visualize error heatmaps
 
 Run `python error_heatmap.py`
-Please note that it will not be able to calculate anything and thus display nothing unless you input experimental data. 
+It cannot calculate anything unless you input experimental data. 
 
 ![error_heatmap.py showing dummy data](assets/error_heatmap.png)
 
@@ -88,7 +88,7 @@ Data is stored in `data.json` using standard SI units (m, J, etc.).
 - *Melt pool width* refers to maximum melt pool width, assuming a circular cross-section ([1], Fig. 3, p.4). Hence it refers to the width at the top of the melt pool.
 - Laser diameter effect not deeply explored but can still be varied.
 
-## Data for AlSi10Mg below: 
+## Data for AlSi10Mg: 
 
 ### Machine Power and Speed 
 
