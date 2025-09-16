@@ -37,7 +37,7 @@ def draw(metal):
             this_entry["pow_interval"] = float(input("What is the step size of speed?: "))
     speed_num_intervals += 1 # We include the lower bound graph
     
-    metal_fig.canvas.manager.set_window_title("Figure 1 - Comparison of Predicted Vs Actual for " + metal)
+    metal_fig.canvas.manager.set_window_title("Figure 1 - Comparison of Predicted vs Actual for " + metal)
 
     metal_fig.suptitle(metal + ": The effect of scanning speed (mm$s^{-1}$) & power (W) on melt pool width & depth(μm) with laser diameter " + str(round(this_entry["sigma"]*(10**6),0)) + "μm")
         
