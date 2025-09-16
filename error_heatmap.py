@@ -87,7 +87,7 @@ def draw(metal):
         Patch(facecolor='red', label='Over-predicted'),
         Patch(facecolor='blue', label='Under-predicted')
     ]
-    ax.legend(handles=legend_elements, title='Prediction Error', loc='upper left', bbox_to_anchor=(1.25,1), borderaxespad=0)
+    ax.legend(handles=legend_elements, title='Prediction error', loc='upper left', bbox_to_anchor=(1.25,1), borderaxespad=0)
     ax.set_title(metal + ": The effect of scanning speed (mm$s^{-1}$) & power (W) on melt pool width & depth(μm) with laser diameter " + str(round(this_entry["sigma"]*(10**6),0)) + "μm", wrap=True)
     fig.canvas.draw_idle()
     
